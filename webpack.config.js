@@ -3,22 +3,22 @@ const path = require("path");
 module.exports = {
   mode: "development",
   entry: "./src/app.ts",
+  devServer: {
+    static: [{ directory: path.join(__dirname) }],
+    port: 3000,
+  },
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, "dist"),
     publicPath: "/dist/",
   },
-  devtool: "inline-source-map",
-  devServer: {
-    static: [{ directory: path.join(__dirname) }],
-    port: 3000,
-  },
+  devtool: "source-map",
   module: {
     rules: [
       {
-        test: /\.ts$ /,
+        test: /\.tsx?$/,
         use: "ts-loader",
-        exclude: "/node-modules",
+        exclude: /node_modules/,
       },
     ],
   },
